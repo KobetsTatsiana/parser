@@ -33,5 +33,15 @@ public class MoneyServiceImpl implements MoneyService{
     public List<Money> getAllMoney() {
         return moneyRepository.findAll();
     }
+
+    public Money get(Integer id)
+    {
+       return moneyRepository.findById(id).get();
+    }
+
+    public void delete(Integer id)
+    {
+        moneyRepository.deleteById(id);
+    }
 }
 
