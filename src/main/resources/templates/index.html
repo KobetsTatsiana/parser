@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<div align="center">
+    <div sec:authorize="isAuthenticated()">
+        Welcome <b><span sec:authentication="name">Username</span></b>
+        &nbsp;
+        <i><span sec:authentication="principal.authorities">Roles</span></i>
+    </div>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" />
+    </form>
+
+    <h1>Bank</h1>
+    <div sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN')">
+        <a href="new">Create New Currency</a>
+    </div>
+
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Currency ID</th>
+            <th>Count</th>
+            <th>Name</th>
+            <th>Price</th>
+
+            <th sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="money : ${listMonies}">
+            <td th:text="${money.id}">Money ID</td>
+            <td th:text="${money.moneyCount}">moneyCount</td>
+            <td th:text="${money.moneyName}">moneyName</td>
+            <td th:text="${money.price}">Price</td>
+
+            <td sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">
+                <a th:href="@{'/edit/' + ${money.id}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/delete/' + ${money.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
