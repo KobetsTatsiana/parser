@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MoneyServiceImpl implements MoneyService{
+public class MoneyServiceImpl implements MoneyService {
 
     @Autowired
     MoneyRepository moneyRepository;
@@ -21,7 +21,7 @@ public class MoneyServiceImpl implements MoneyService{
     @Override
     public boolean isExist(String moneyName) {
         List<Money> allMoney = moneyRepository.findAll();
-        for (Money m: allMoney) {
+        for (Money m : allMoney) {
             if (m.getMoneyName().equals(moneyName)) {
                 return true;
             }
@@ -34,13 +34,13 @@ public class MoneyServiceImpl implements MoneyService{
         return moneyRepository.findAll();
     }
 
-    public Money get(Integer id)
-    {
-       return moneyRepository.findById(id).get();
+    @Override
+    public Money get(Integer id) {
+        return moneyRepository.findById(id).get();
     }
 
-    public void delete(Integer id)
-    {
+    @Override
+    public void delete(Integer id) {
         moneyRepository.deleteById(id);
     }
 }
