@@ -14,18 +14,15 @@ public class Money {
     public String moneyCount;
     @Column(name = "moneyName")
     public String moneyName;
-    @Column(name = "moneyInfo")
-    public String moneyInfo;
     @Column(name = "price")
     public String price;
 
     public Money(){}
 
-    public Money(Integer id, String moneyCount, String moneyName, String moneyInfo, String price) {
+    public Money(Integer id, String moneyCount, String moneyName, String price) {
         this.id = id;
         this.moneyCount = moneyCount;
         this.moneyName = moneyName;
-        this.moneyInfo = moneyInfo;
         this.price = price;
     }
 
@@ -51,14 +48,6 @@ public class Money {
 
     public void setMoneyName(String moneyName) {
         this.moneyName = moneyName;
-    }
-
-    public String getMoneyInfo() {
-        return moneyInfo;
-    }
-
-    public void setMoneyInfo(String moneyInfo) {
-        this.moneyInfo = moneyInfo;
     }
 
     public String getPrice() {
